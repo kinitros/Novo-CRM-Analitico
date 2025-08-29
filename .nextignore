@@ -1,0 +1,21 @@
+# Ignore backend files
+backend/
+
+# Ignore old frontend
+frontend/
+
+# Ignore nextjs-crm folder
+nextjs-crm/
+
+# Ignore API files
+api/
+
+# Ignore proxy files
+*.php
+
+# Ignore documentation
+*.md
+!README.md
+
+# Ignore zip files
+*.zip
