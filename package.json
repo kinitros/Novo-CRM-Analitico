@@ -1,14 +1,39 @@
 {
-  "name": "leap-app",
+  "name": "crm-nextjs-advanced",
   "version": "1.0.0",
-  "type": "module",
-  "packageManager": "bun",
+  "private": true,
   "scripts": {
-    "build": "cd frontend && npm install && npm run build && cp -r dist/* ../",
-    "dev": "cd frontend && npm run dev"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
-  "workspaces": [
-    "backend",
-    "frontend"
-  ]
+  "dependencies": {
+    "next": "15.5.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "typescript": "^5",
+    "tailwindcss": "^3.4.0",
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.4.0",
+    "recharts": "^2.12.7",
+    "lucide-react": "^0.460.0",
+    "framer-motion": "^11.11.17",
+    "@radix-ui/react-select": "^2.1.2",
+    "@radix-ui/react-dialog": "^1.1.2",
+    "@radix-ui/react-dropdown-menu": "^2.1.2",
+    "@radix-ui/react-tabs": "^1.1.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.5.4",
+    "date-fns": "^4.1.0",
+    "zustand": "^5.0.2"
+  },
+  "devDependencies": {
+    "eslint": "^8",
+    "eslint-config-next": "15.5.2"
+  }
 }
