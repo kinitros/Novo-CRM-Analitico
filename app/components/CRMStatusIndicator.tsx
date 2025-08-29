@@ -34,6 +34,22 @@ export default function CRMStatusIndicator({ showDetails = false, className = ''
     return status.error || 'CRM Desconectado'
   }
 
+  const getLastSyncText = () => {
+    if (!status.lastTest) return 'Nunca sincronizado'
+    const now = new Date()
+    const diff = now.getTime() - status.lastTest.getTime()
+    const seconds = Math.floor(diff / 1000)
+    
+    if (seconds < 30) return 'Sincronizado agora'
+    if (seconds < 60) return `${seconds}s atrás`
+    
+    const minutes = Math.floor(seconds / 60)
+    if (minutes < 60) return `${minutes}min atrás`
+    
+    const hours = Math.floor(minutes / 60)
+    return `${hours}h atrás`
+  }
+
   const formatLastTest = () => {
     if (!status.lastTest) return 'Nunca testado'
     
@@ -58,13 +74,19 @@ export default function CRMStatusIndicator({ showDetails = false, className = ''
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         className={`flex items-center space-x-2 ${className}`}
+        title={`${getStatusText()} - ${getLastSyncText()}`}
       >
         <div className={getStatusColor()}>
           {getStatusIcon()}
         </div>
-        <span className={`text-sm font-medium ${getStatusColor()}`}>
-          {status.connected ? 'Online' : 'Offline'}
-        </span>
+        <div className="flex flex-col">
+          <span className={`text-sm font-medium ${getStatusColor()}`}>
+            {status.connected ? 'Online' : 'Offline'}
+          </span>
+          <span className="text-xs text-gray-500">
+            {getLastSyncText()}
+          </span>
+        </div>
       </motion.div>
     )
   }
