@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "type": "module",
   "packageManager": "bun",
+  "scripts": {
+    "build": "cd frontend && npm install && npm run build && cp -r dist/* ../",
+    "dev": "cd frontend && npm run dev"
+  },
   "workspaces": [
     "backend",
     "frontend"
