@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 // Configuração do CRM atual
 const CRM_BASE_URL = 'https://crm.conectaprime.com'
-const CRM_API_TOKEN = process.env.CRM_API_TOKEN || 'your-api-token-here'
+const CRM_API_TOKEN = process.env.CRM_API_TOKEN || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InN0YXRpYy1hZG1pbi1pZCIsImVtYWlsIjoiYWRtaW5Ac2VndWlkb3Jlc3ByaW1lLmNvbSIsInJvbGUiOiJhZG1pbiIsInBlcm1pc3NvZXMiOlsiSGlzdMOzcmljbyBkZSBFbnZpb3MiLCJSZWFsaXphciBFbnZpb3MiXSwiaWF0IjoxNzUxNDkwNDk3fQ.FNSAlVtFjpZVTYvkjEVXRRghvTscU0sqdP6H9mk_KgI'
 
 // Interface para dados do CRM
 interface CRMCustomer {

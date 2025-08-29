@@ -7,13 +7,6 @@
       "static/chunks/main-app-d6e5bea84536dd85.js",
       "static/chunks/app/_not-found/page-56c394023f93822e.js"
     ],
-    "/api/crm-integration/route": [
-      "static/chunks/webpack-b33202c35554bc82.js",
-      "static/chunks/4bd1b696-409494caf8c83275.js",
-      "static/chunks/255-ab5b1b0d4d6437a9.js",
-      "static/chunks/main-app-d6e5bea84536dd85.js",
-      "static/chunks/app/api/crm-integration/route-142e4c079f51a9cf.js"
-    ],
     "/layout": [
       "static/chunks/webpack-b33202c35554bc82.js",
       "static/chunks/4bd1b696-409494caf8c83275.js",
@@ -21,6 +14,13 @@
       "static/chunks/main-app-d6e5bea84536dd85.js",
       "static/css/00f45cc7a3720fa3.css",
       "static/chunks/app/layout-b19a912cb606388f.js"
+    ],
+    "/api/crm-integration/route": [
+      "static/chunks/webpack-b33202c35554bc82.js",
+      "static/chunks/4bd1b696-409494caf8c83275.js",
+      "static/chunks/255-ab5b1b0d4d6437a9.js",
+      "static/chunks/main-app-d6e5bea84536dd85.js",
+      "static/chunks/app/api/crm-integration/route-142e4c079f51a9cf.js"
     ],
     "/page": [
       "static/chunks/webpack-b33202c35554bc82.js",
@@ -41,6 +41,14 @@
       "static/chunks/195-9c7f065cd8624bfd.js",
       "static/chunks/app/vendas/page-2fb88a8786a91b65.js"
     ],
+    "/configuracao/page": [
+      "static/chunks/webpack-b33202c35554bc82.js",
+      "static/chunks/4bd1b696-409494caf8c83275.js",
+      "static/chunks/255-ab5b1b0d4d6437a9.js",
+      "static/chunks/main-app-d6e5bea84536dd85.js",
+      "static/chunks/911-adc826c78d947d17.js",
+      "static/chunks/app/configuracao/page-bcd91c8850ad16db.js"
+    ],
     "/clientes/page": [
       "static/chunks/webpack-b33202c35554bc82.js",
       "static/chunks/4bd1b696-409494caf8c83275.js",
@@ -49,14 +57,6 @@
       "static/chunks/911-adc826c78d947d17.js",
       "static/chunks/55-d7cc80e319fe798b.js",
       "static/chunks/app/clientes/page-15a1e59a20e3ff46.js"
-    ],
-    "/configuracao/page": [
-      "static/chunks/webpack-b33202c35554bc82.js",
-      "static/chunks/4bd1b696-409494caf8c83275.js",
-      "static/chunks/255-ab5b1b0d4d6437a9.js",
-      "static/chunks/main-app-d6e5bea84536dd85.js",
-      "static/chunks/911-adc826c78d947d17.js",
-      "static/chunks/app/configuracao/page-bcd91c8850ad16db.js"
     ]
   }
 }
