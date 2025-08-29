@@ -8,10 +8,6 @@
       "config": {
         "distDir": "dist"
       }
-    },
-    {
-      "src": "api/crm.php",
-      "use": "vercel-php@0.6.0"
     }
   ],
   "installCommand": "cd frontend && npm install",
