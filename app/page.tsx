@@ -152,9 +152,10 @@ function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
   const categories = ['Dashboards', 'Análise', 'Vendas', 'Config']
 
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <>
+    <>
+      {/* Overlay para mobile */}
+      <AnimatePresence>
+        {isOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -162,13 +163,17 @@ function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
             className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 lg:hidden"
             onClick={() => setIsOpen(false)}
           />
-          <motion.div
-            initial={{ x: -300 }}
-            animate={{ x: 0 }}
-            exit={{ x: -300 }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed left-0 top-0 h-full w-80 bg-white shadow-2xl z-50 lg:relative lg:translate-x-0 lg:shadow-none lg:border-r lg:border-gray-200"
-          >
+        )}
+      </AnimatePresence>
+      
+      {/* Sidebar */}
+      <div className="lg:block lg:w-80 lg:flex-shrink-0">
+        <motion.div
+          initial={{ x: -300 }}
+          animate={{ x: isOpen ? 0 : -300 }}
+          transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+          className="fixed left-0 top-0 h-full w-80 bg-white shadow-2xl z-50 lg:relative lg:translate-x-0 lg:shadow-none lg:border-r lg:border-gray-200"
+        >
             {/* Header do Sidebar */}
             <div className="p-6 border-b border-gray-100 bg-gradient-to-r from-blue-600 to-blue-700">
               <div className="flex items-center justify-between">
@@ -259,15 +264,14 @@ function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
               </div>
             </div>
           </motion.div>
-        </>
-      )}
-    </AnimatePresence>
+        </div>
+    </>
   )
 }
 
 export default function Dashboard() {
   const [isLoading, setIsLoading] = useState(true)
-  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [sidebarOpen, setSidebarOpen] = useState(true) // Aberta por padrão
   const [currentTime, setCurrentTime] = useState(new Date())
 
   useEffect(() => {

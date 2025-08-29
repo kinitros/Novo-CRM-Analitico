@@ -1,8 +1,8 @@
 {
-  "/_not-found/page": "/_not-found",
   "/api/crm-integration/route": "/api/crm-integration",
+  "/_not-found/page": "/_not-found",
   "/page": "/",
+  "/vendas/page": "/vendas",
   "/clientes/page": "/clientes",
-  "/configuracao/page": "/configuracao",
-  "/vendas/page": "/vendas"
+  "/configuracao/page": "/configuracao"
 }

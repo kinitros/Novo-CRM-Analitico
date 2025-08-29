@@ -122,9 +122,18 @@ export async function GET(request: NextRequest) {
           data: analytics
         })
         
+      case 'test':
+        // Teste de conexão
+        const testResult = await fetchFromCRM('crm/clientes?limit=1')
+        return NextResponse.json({
+          success: true,
+          message: 'Conexão estabelecida com sucesso',
+          data: { connected: true, timestamp: new Date().toISOString() }
+        })
+        
       default:
         return NextResponse.json(
-          { success: false, error: 'Tipo de dados não especificado' },
+          { success: false, error: 'Tipo de dados não especificado. Use: customers, sales, products, dashboard, analytics ou test' },
           { status: 400 }
         )
     }
