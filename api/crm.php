@@ -14,8 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 $CRM_BASE_URL = $_ENV['CRM_BASE_URL'] ?? 'https://crm.conectaprime.com';
 $USE_FALLBACK_DATA = $_ENV['USE_FALLBACK_DATA'] ?? true;
 
-// Token JWT padrão (pode ser sobrescrito por variável de ambiente)
-$JWT_TOKEN = $_ENV['JWT_TOKEN'] ?? 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3Yzg0OTBmZWYyOWU2Zjk1Mzk1NjFiMyIsImVtYWlsIjoiYWRtaW5Ac2VndWlkb3Jlc3ByaW1lLmNvbSIsInJvbGUiOiJhZG1pbiIsInBlcm1pc3NvZXMiOltdLCJpYXQiOjE3NTY0ODYxODQsImV4cCI6MTc1NjUwNDE4NH0.IJX9bfxu5lIO3MFkJ63QUb58MSlZ2JPTZffj_PMZQwg';
+// Token JWT estático (nunca expira)
+$JWT_TOKEN = $_ENV['JWT_TOKEN'] ?? 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InN0YXRpYy1hZG1pbi1pZCIsImVtYWlsIjoiYWRtaW5Ac2VndWlkb3Jlc3ByaW1lLmNvbSIsInJvbGUiOiJhZG1pbiIsInBlcm1pc3NvZXMiOlsiSGlzdMOzcmljbyBkZSBFbnZpb3MiLCJSZWFsaXphciBFbnZpb3MiXSwiaWF0IjoxNzUxNDkwNDk3fQ.FNSAlVtFjpZVTYvkjEVXRRghvTscU0sqdP6H9mk_KgI';
 
 // Cache simples em memória (para Vercel)
 $cache = [];
