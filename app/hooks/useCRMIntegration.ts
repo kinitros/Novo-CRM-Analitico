@@ -222,21 +222,30 @@ export function useCustomerData() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   
-  const { fetchCustomers } = useCRMIntegration()
-  
   const loadCustomers = useCallback(async (filters?: Record<string, string>) => {
     setLoading(true)
     setError(null)
     
     try {
-      const data = await fetchCustomers(filters)
-      setCustomers(data)
+      const searchParams = new URLSearchParams({
+        type: 'customers',
+        ...filters
+      })
+      
+      const response = await fetch(`/api/crm-integration?${searchParams}`)
+      const result = await response.json()
+      
+      if (!result.success) {
+        throw new Error(result.error || 'Erro ao buscar dados do CRM')
+      }
+      
+      setCustomers(result.data || [])
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Erro ao carregar clientes')
     } finally {
       setLoading(false)
     }
-  }, [fetchCustomers])
+  }, [])
   
   useEffect(() => {
     loadCustomers()
@@ -257,8 +266,6 @@ export function useSalesData(startDate?: string, endDate?: string) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   
-  const { fetchSales } = useCRMIntegration()
-  
   const loadSales = useCallback(async () => {
     if (!startDate || !endDate) return
     
@@ -266,14 +273,26 @@ export function useSalesData(startDate?: string, endDate?: string) {
     setError(null)
     
     try {
-      const data = await fetchSales(startDate, endDate)
-      setSales(data)
+      const searchParams = new URLSearchParams({
+        type: 'sales',
+        startDate,
+        endDate
+      })
+      
+      const response = await fetch(`/api/crm-integration?${searchParams}`)
+      const result = await response.json()
+      
+      if (!result.success) {
+        throw new Error(result.error || 'Erro ao buscar dados do CRM')
+      }
+      
+      setSales(result.data || [])
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Erro ao carregar vendas')
     } finally {
       setLoading(false)
     }
-  }, [fetchSales, startDate, endDate])
+  }, [startDate, endDate])
   
   useEffect(() => {
     loadSales()

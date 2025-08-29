@@ -2,7 +2,7 @@
   "/_not-found/page": "/_not-found",
   "/api/crm-integration/route": "/api/crm-integration",
   "/page": "/",
-  "/vendas/page": "/vendas",
   "/configuracao/page": "/configuracao",
+  "/vendas/page": "/vendas",
   "/clientes/page": "/clientes"
 }
