@@ -35,6 +35,7 @@
     "**/*.tsx"
   ],
   "exclude": [
+    "../backend/**/*",
     "node_modules"
   ]
 }

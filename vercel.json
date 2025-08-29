@@ -14,6 +14,7 @@
       "use": "vercel-php@0.6.0"
     }
   ],
+  "installCommand": "cd frontend && npm install",
   "routes": [
     {
       "src": "/api/(.*)",
