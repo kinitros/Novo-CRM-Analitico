@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import Link from 'next/link'
 import {
   BarChart,
   Bar,
@@ -39,6 +40,7 @@ import {
   Eye,
   Calendar,
   Globe,
+  ExternalLink,
 } from 'lucide-react'
 
 // Dados simulados para demonstração
@@ -137,13 +139,13 @@ function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
     { id: 'dashboard', label: 'Dashboard Principal', icon: '📊', category: 'Dashboards' },
     { id: 'executive', label: 'Dashboard Executivo', icon: '📈', category: 'Dashboards' },
     { id: 'intelligence', label: 'Business Intelligence', icon: '🧠', category: 'Dashboards' },
-    { id: 'customers', label: 'Clientes', icon: '👥', category: 'Análise' },
+    { id: 'clientes', label: 'Dashboard de Clientes', icon: '👥', category: 'Análise' },
     { id: 'inactive', label: 'Clientes Inativos', icon: '😴', category: 'Análise' },
     { id: 'segmentation', label: 'Segmentação RFM', icon: '🎯', category: 'Análise' },
-    { id: 'sales', label: 'Vendas', icon: '💰', category: 'Vendas' },
+    { id: 'vendas', label: 'Dashboard de Vendas', icon: '💰', category: 'Vendas' },
     { id: 'advanced-sales', label: 'Vendas Avançadas', icon: '📊', category: 'Vendas' },
     { id: 'products', label: 'Produtos', icon: '📦', category: 'Vendas' },
-    { id: 'integration', label: 'Integração CRM', icon: '🔗', category: 'Config' },
+    { id: 'configuracao', label: 'Integração CRM', icon: '🔗', category: 'Config' },
     { id: 'jwt', label: 'Configuração JWT', icon: '🔐', category: 'Config' },
   ]
 
@@ -199,26 +201,46 @@ function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
                     {category === 'Config' && 'Configurações'}
                   </h3>
                   <div className="space-y-1">
-                    {menuItems.filter(item => item.category === category).map(item => (
-                      <motion.button
-                        key={item.id}
-                        onClick={() => setActiveMenu(item.id)}
-                        className={`w-full sidebar-nav-item ${
-                          activeMenu === item.id ? 'sidebar-nav-item-active' : 'sidebar-nav-item-inactive'
-                        }`}
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        <span className="text-lg mr-3">{item.icon}</span>
-                        <span className="font-medium">{item.label}</span>
-                        {activeMenu === item.id && (
-                          <motion.div
-                            layoutId="activeIndicator"
-                            className="absolute right-2 w-2 h-2 bg-white rounded-full"
-                          />
-                        )}
-                      </motion.button>
-                    ))}
+                    {menuItems.filter(item => item.category === category).map(item => {
+                      const isExternal = ['executive', 'intelligence', 'clientes', 'inactive', 'segmentation', 'vendas', 'advanced-sales', 'products', 'configuracao', 'jwt'].includes(item.id)
+                      
+                      if (isExternal) {
+                        return (
+                          <Link key={item.id} href={`/${item.id}`}>
+                            <motion.div
+                              className="w-full sidebar-nav-item sidebar-nav-item-inactive group"
+                              whileHover={{ scale: 1.02 }}
+                              whileTap={{ scale: 0.98 }}
+                            >
+                              <span className="text-lg mr-3">{item.icon}</span>
+                              <span className="font-medium">{item.label}</span>
+                              <ExternalLink className="w-4 h-4 ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
+                            </motion.div>
+                          </Link>
+                        )
+                      }
+                      
+                      return (
+                        <motion.button
+                          key={item.id}
+                          onClick={() => setActiveMenu(item.id)}
+                          className={`w-full sidebar-nav-item ${
+                            activeMenu === item.id ? 'sidebar-nav-item-active' : 'sidebar-nav-item-inactive'
+                          }`}
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                        >
+                          <span className="text-lg mr-3">{item.icon}</span>
+                          <span className="font-medium">{item.label}</span>
+                          {activeMenu === item.id && (
+                            <motion.div
+                              layoutId="activeIndicator"
+                              className="absolute right-2 w-2 h-2 bg-white rounded-full"
+                            />
+                          )}
+                        </motion.button>
+                      )
+                    })}
                   </div>
                 </div>
               ))}

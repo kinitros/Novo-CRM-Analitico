@@ -46,6 +46,24 @@
       "regex": "^/_not\\-found(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/clientes",
+      "regex": "^/clientes(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/clientes(?:/)?$"
+    },
+    {
+      "page": "/configuracao",
+      "regex": "^/configuracao(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/configuracao(?:/)?$"
+    },
+    {
+      "page": "/vendas",
+      "regex": "^/vendas(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/vendas(?:/)?$"
     }
   ],
   "dataRoutes": [],

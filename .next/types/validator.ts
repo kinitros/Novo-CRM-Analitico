@@ -47,10 +47,28 @@ type RouteHandlerConfig<Route extends AppRouteHandlerRoutes = AppRouteHandlerRou
 }
 
 
+// Validate ../../app/clientes/page.tsx
+{
+  const handler = {} as typeof import("../../app/clientes/page.js")
+  handler satisfies AppPageConfig<"/clientes">
+}
+
+// Validate ../../app/configuracao/page.tsx
+{
+  const handler = {} as typeof import("../../app/configuracao/page.js")
+  handler satisfies AppPageConfig<"/configuracao">
+}
+
 // Validate ../../app/page.tsx
 {
   const handler = {} as typeof import("../../app/page.js")
   handler satisfies AppPageConfig<"/">
+}
+
+// Validate ../../app/vendas/page.tsx
+{
+  const handler = {} as typeof import("../../app/vendas/page.js")
+  handler satisfies AppPageConfig<"/vendas">
 }
 
 // Validate ../../app/api/crm-integration/route.ts
