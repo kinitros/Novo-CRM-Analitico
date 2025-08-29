@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import {
   Settings,
@@ -16,111 +16,13 @@ import {
   Zap,
   Shield
 } from 'lucide-react'
-
-interface CRMConfig {
-  baseUrl: string
-  apiToken: string
-  autoSync: boolean
-  syncInterval: number
-}
-
-interface ConnectionStatus {
-  connected: boolean
-  lastTest: Date | null
-  error: string | null
-  responseTime: number | null
-}
+import { useCRM } from '../contexts/CRMContext'
 
 export default function CRMIntegrationSetup() {
-  const [config, setConfig] = useState<CRMConfig>({
-    baseUrl: 'https://crm.conectaprime.com',
-    apiToken: '',
-    autoSync: true,
-    syncInterval: 5
-  })
-  
-  const [status, setStatus] = useState<ConnectionStatus>({
-    connected: false,
-    lastTest: null,
-    error: null,
-    responseTime: null
-  })
-  
+  const { config, setConfig, status, isLoading, testConnection, saveConfig } = useCRM()
   const [showToken, setShowToken] = useState(false)
-  const [testing, setTesting] = useState(false)
-  const [saving, setSaving] = useState(false)
 
-  // Carregar configuração salva
-  useEffect(() => {
-    const savedConfig = localStorage.getItem('crm-config')
-    if (savedConfig) {
-      setConfig(JSON.parse(savedConfig))
-    }
-  }, [])
 
-  // Testar conexão com o CRM
-  const testConnection = async () => {
-    setTesting(true)
-    const startTime = Date.now()
-    
-    try {
-      const response = await fetch('/api/crm-integration?type=test', {
-        method: 'GET',
-        headers: {
-          'X-CRM-URL': config.baseUrl,
-          'X-CRM-TOKEN': config.apiToken
-        }
-      })
-      
-      const responseTime = Date.now() - startTime
-      const result = await response.json()
-      
-      if (result.success) {
-        setStatus({
-          connected: true,
-          lastTest: new Date(),
-          error: null,
-          responseTime
-        })
-      } else {
-        setStatus({
-          connected: false,
-          lastTest: new Date(),
-          error: result.error || 'Erro na conexão',
-          responseTime
-        })
-      }
-    } catch (error) {
-      setStatus({
-        connected: false,
-        lastTest: new Date(),
-        error: error instanceof Error ? error.message : 'Erro de rede',
-        responseTime: Date.now() - startTime
-      })
-    } finally {
-      setTesting(false)
-    }
-  }
-
-  // Salvar configuração
-  const saveConfig = async () => {
-    setSaving(true)
-    
-    try {
-      // Salvar no localStorage
-      localStorage.setItem('crm-config', JSON.stringify(config))
-      
-      // Testar conexão após salvar
-      await testConnection()
-      
-      // Aqui você pode adicionar uma chamada para salvar no backend se necessário
-      
-    } catch (error) {
-      console.error('Erro ao salvar configuração:', error)
-    } finally {
-      setSaving(false)
-    }
-  }
 
   // Copiar token para clipboard
   const copyToken = async () => {
@@ -184,11 +86,11 @@ export default function CRMIntegrationSetup() {
             
             <button
               onClick={testConnection}
-              disabled={testing}
+              disabled={isLoading}
               className="flex items-center space-x-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50 transition-colors"
             >
-              <RefreshCw className={`w-4 h-4 ${testing ? 'animate-spin' : ''}`} />
-              <span>{testing ? 'Testando...' : 'Testar Conexão'}</span>
+              <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />
+              <span>{isLoading ? 'Testando...' : 'Testar Conexão'}</span>
             </button>
           </div>
           
@@ -219,7 +121,7 @@ export default function CRMIntegrationSetup() {
                 <input
                   type="url"
                   value={config.baseUrl}
-                  onChange={(e) => setConfig(prev => ({ ...prev, baseUrl: e.target.value }))}
+                  onChange={(e) => setConfig({ ...config, baseUrl: e.target.value })}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="https://crm.conectaprime.com"
                 />
@@ -239,7 +141,7 @@ export default function CRMIntegrationSetup() {
                 <input
                   type={showToken ? 'text' : 'password'}
                   value={config.apiToken}
-                  onChange={(e) => setConfig(prev => ({ ...prev, apiToken: e.target.value }))}
+                  onChange={(e) => setConfig({ ...config, apiToken: e.target.value })}
                   className="w-full px-4 py-3 pr-20 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="Seu token de API do CRM"
                 />
@@ -286,7 +188,7 @@ export default function CRMIntegrationSetup() {
                 </p>
               </div>
               <button
-                onClick={() => setConfig(prev => ({ ...prev, autoSync: !prev.autoSync }))}
+                onClick={() => setConfig({ ...config, autoSync: !config.autoSync })}
                 className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
                   config.autoSync ? 'bg-blue-500' : 'bg-gray-300'
                 }`}
@@ -307,7 +209,7 @@ export default function CRMIntegrationSetup() {
                 </label>
                 <select
                   value={config.syncInterval}
-                  onChange={(e) => setConfig(prev => ({ ...prev, syncInterval: Number(e.target.value) }))}
+                  onChange={(e) => setConfig({ ...config, syncInterval: Number(e.target.value) })}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
                   <option value={1}>1 minuto</option>
@@ -340,18 +242,18 @@ export default function CRMIntegrationSetup() {
       <div className="mt-8 flex justify-end space-x-4">
         <button
           onClick={testConnection}
-          disabled={testing}
+          disabled={isLoading}
           className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 disabled:opacity-50 transition-colors"
         >
-          {testing ? 'Testando...' : 'Testar Conexão'}
+          {isLoading ? 'Testando...' : 'Testar Conexão'}
         </button>
         
         <button
           onClick={saveConfig}
-          disabled={saving || !config.baseUrl || !config.apiToken}
+          disabled={isLoading || !config.baseUrl || !config.apiToken}
           className="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50 transition-colors"
         >
-          {saving ? 'Salvando...' : 'Salvar Configuração'}
+          {isLoading ? 'Salvando...' : 'Salvar Configuração'}
         </button>
       </div>
 

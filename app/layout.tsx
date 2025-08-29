@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import { CRMProvider } from './contexts/CRMContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -26,9 +27,11 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className={`${inter.className} h-full bg-gray-50 antialiased`}>
-        <div className="min-h-full">
-          {children}
-        </div>
+        <CRMProvider>
+          <div className="min-h-full">
+            {children}
+          </div>
+        </CRMProvider>
       </body>
     </html>
   )

@@ -17,7 +17,7 @@ import {
   Pie,
   Cell,
   AreaChart,
-  Area,
+  Area
 } from 'recharts'
 import {
   TrendingUp,
@@ -42,6 +42,7 @@ import {
   Globe,
   ExternalLink,
 } from 'lucide-react'
+import CRMStatusIndicator from './components/CRMStatusIndicator'
 
 // Dados simulados para demonstração
 const salesData = [
@@ -339,10 +340,7 @@ export default function Dashboard() {
                 <span>{currentTime.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}</span>
               </div>
               
-              <div className="flex items-center space-x-2">
-                <div className="w-3 h-3 bg-emerald-500 rounded-full animate-pulse" />
-                <span className="text-sm font-medium text-emerald-600">Online</span>
-              </div>
+              <CRMStatusIndicator />
               
               <div className="flex items-center space-x-2">
                 <button className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors">

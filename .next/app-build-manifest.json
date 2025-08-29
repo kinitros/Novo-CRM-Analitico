@@ -12,8 +12,8 @@
       "static/chunks/4bd1b696-409494caf8c83275.js",
       "static/chunks/255-ab5b1b0d4d6437a9.js",
       "static/chunks/main-app-d6e5bea84536dd85.js",
-      "static/css/00f45cc7a3720fa3.css",
-      "static/chunks/app/layout-b19a912cb606388f.js"
+      "static/css/17d3a6cd6492c3a9.css",
+      "static/chunks/app/layout-e716c171246f5198.js"
     ],
     "/api/crm-integration/route": [
       "static/chunks/webpack-b33202c35554bc82.js",
@@ -29,8 +29,8 @@
       "static/chunks/main-app-d6e5bea84536dd85.js",
       "static/chunks/911-adc826c78d947d17.js",
       "static/chunks/195-9c7f065cd8624bfd.js",
-      "static/chunks/962-4bffb76b2034567a.js",
-      "static/chunks/app/page-fee8d04952644428.js"
+      "static/chunks/50-497b41740090712d.js",
+      "static/chunks/app/page-1eafc92f39a0d938.js"
     ],
     "/vendas/page": [
       "static/chunks/webpack-b33202c35554bc82.js",
@@ -47,7 +47,7 @@
       "static/chunks/255-ab5b1b0d4d6437a9.js",
       "static/chunks/main-app-d6e5bea84536dd85.js",
       "static/chunks/911-adc826c78d947d17.js",
-      "static/chunks/app/configuracao/page-bcd91c8850ad16db.js"
+      "static/chunks/app/configuracao/page-f2b156aa5e552b7e.js"
     ],
     "/clientes/page": [
       "static/chunks/webpack-b33202c35554bc82.js",
