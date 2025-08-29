@@ -33,6 +33,7 @@ import {
   LineChart,
   Line,
   PieChart as RechartsPieChart,
+  Pie,
   Cell,
   AreaChart,
   Area
@@ -89,6 +90,14 @@ interface MetricasVenda {
   crescimentoMensal: number
 }
 
+interface DadosGrafico {
+  vendasPorDia: Array<{ data: string; vendas: number; receita: number }>
+  vendasPorOrigem: Array<{ name: string; value: number; receita: number }>
+  vendasPorFormaPagamento: Array<{ name: string; value: number; receita: number }>
+  produtosMaisVendidos: Array<{ name: string; quantidade: number; receita: number }>
+  funil: Array<{ etapa: string; valor: number; taxa: number }>
+}
+
 export default function VendasDashboard() {
   const [filtros, setFiltros] = useState<FiltrosVenda>({
     dataInicio: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
@@ -120,7 +129,7 @@ export default function VendasDashboard() {
     taxaConversao: 0,
     crescimentoMensal: 0
   })
-  const [dadosGraficos, setDadosGraficos] = useState({
+  const [dadosGraficos, setDadosGraficos] = useState<DadosGrafico>({
     vendasPorDia: [],
     vendasPorOrigem: [],
     vendasPorFormaPagamento: [],
@@ -239,11 +248,11 @@ export default function VendasDashboard() {
     }, {})
 
     setDadosGraficos({
-      vendasPorDia: Object.values(vendasPorDia).sort((a: any, b: any) => a.data.localeCompare(b.data)),
-      vendasPorOrigem: Object.values(vendasPorOrigem),
-      vendasPorFormaPagamento: Object.values(vendasPorFormaPagamento),
-      produtosMaisVendidos: Object.values(produtosMaisVendidos)
-        .sort((a: any, b: any) => b.quantidade - a.quantidade)
+      vendasPorDia: (Object.values(vendasPorDia) as Array<{ data: string; vendas: number; receita: number }>).sort((a, b) => a.data.localeCompare(b.data)),
+      vendasPorOrigem: Object.values(vendasPorOrigem) as Array<{ name: string; value: number; receita: number }>,
+      vendasPorFormaPagamento: Object.values(vendasPorFormaPagamento) as Array<{ name: string; value: number; receita: number }>,
+      produtosMaisVendidos: (Object.values(produtosMaisVendidos) as Array<{ name: string; quantidade: number; receita: number }>)
+        .sort((a, b) => b.quantidade - a.quantidade)
         .slice(0, 10),
       funil: [
         { etapa: 'Visitantes', valor: 10000, taxa: 100 },
@@ -789,7 +798,7 @@ export default function VendasDashboard() {
                         <Eye className="w-4 h-4" />
                       </button>
                     </td>
-                  </tr>
+                  </motion.tr>
                 ))}
               </tbody>
             </table>

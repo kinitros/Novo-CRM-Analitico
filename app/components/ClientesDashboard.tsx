@@ -252,7 +252,7 @@ export default function ClientesDashboard() {
             <h1 className="text-3xl font-bold text-gray-900 flex items-center">
               <Users className="w-8 h-8 mr-3 text-blue-500" />
               Dashboard de Clientes
-            </div>
+            </h1>
             <p className="text-gray-600 mt-2">Análise completa da base de clientes com segmentação RFM</p>
           </div>
           
@@ -604,7 +604,7 @@ export default function ClientesDashboard() {
                       </button>
                     </div>
                   </td>
-                </tr>
+                </motion.tr>
               ))}
             </tbody>
           </table>
