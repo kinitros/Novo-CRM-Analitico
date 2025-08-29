@@ -1,0 +1,12 @@
+# Configuração para crm-proxy.php
+# Este arquivo deve ser colocado na raiz do public_html como .htaccess
+
+RewriteEngine On
+
+# Regra para redirecionar /crm-proxy/... para /crm-proxy.php/...
+RewriteRule ^crm-proxy/(.*)$ crm-proxy.php/$1 [L,QSA]
+
+# Permitir acesso direto ao crm-proxy.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^crm-proxy\.php/(.*)$ crm-proxy.php [L,QSA,E=PATH_INFO:/$1]
