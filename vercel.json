@@ -10,7 +10,7 @@
       }
     },
     {
-      "src": "api/**/*.php",
+      "src": "api/crm.php",
       "use": "vercel-php@0.6.0"
     }
   ],
