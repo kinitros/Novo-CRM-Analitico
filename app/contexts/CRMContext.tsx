@@ -29,7 +29,7 @@ interface CRMContextType {
 
 const defaultConfig: CRMConfig = {
   baseUrl: 'https://crm.conectaprime.com',
-  apiToken: '',
+  apiToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6InN0YXRpYy1hZG1pbi1pZCIsImVtYWlsIjoiYWRtaW5Ac2VndWlkb3Jlc3ByaW1lLmNvbSIsInJvbGUiOiJhZG1pbiIsInBlcm1pc3NvZXMiOlsiSGlzdMOzcmljbyBkZSBFbnZpb3MiLCJSZWFsaXphciBFbnZpb3MiXSwiaWF0IjoxNzUxNDkwNDk3fQ.FNSAlVtFjpZVTYvkjEVXRRghvTscU0sqdP6H9mk_KgI',
   autoSync: true,
   syncInterval: 5
 }
@@ -79,6 +79,18 @@ export function CRMProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     localStorage.setItem('crm-status', JSON.stringify(status))
   }, [status])
+
+  // Testar conexão automaticamente ao inicializar se o token estiver configurado
+  useEffect(() => {
+    if (config.apiToken && config.apiToken !== '' && !status.connected) {
+      // Aguardar um pouco para garantir que o componente foi montado
+      const timer = setTimeout(() => {
+        testConnection()
+      }, 1000)
+      
+      return () => clearTimeout(timer)
+    }
+  }, [config.apiToken])
 
   // Testar conexão
   const testConnection = async () => {
